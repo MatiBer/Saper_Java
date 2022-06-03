@@ -7,20 +7,21 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class SaperModel extends JPanel {
-    private final int rozmiarKomorki = 15;
-    private final int zakrytaKomorka = 10;
-    private final int oflagowanaKomorka = 10;
-    private final int pustaKomorka = 0;
-    private final int minaKomorka = 9;
-    private final int zakrytaMinaKomorka = minaKomorka + zakrytaKomorka;
-    private final int oflagowanaMinaKomorka = zakrytaMinaKomorka + oflagowanaKomorka;
-    private final int liczbaWierszy = 9;
-    private final int liczbaKolumn = 9;
-    private int[] pole;
-    private boolean czyGra;
-    private int pozostaloMin;
-    private Image[] ikona;
-    private int wszystkieKomorki;
+    private SaperKontroler kontroler;
+    public static final int rozmiarKomorki = 24;
+    public static final int zakrytaKomorka = 10;
+    public static final int oflagowanaKomorka = 10;
+    public static final int pustaKomorka = 0;
+    public static final int minaKomorka = 9;
+    public static final int zakrytaMinaKomorka = minaKomorka + zakrytaKomorka;
+    public static final int oflagowanaMinaKomorka = zakrytaMinaKomorka + oflagowanaKomorka;
+    public static final int liczbaWierszy = 9;
+    public static final int liczbaKolumn = 9;
+    public static int[] pole;
+    public static boolean czyGra;
+    public static int pozostaloMin;
+    public static Image[] ikona;
+    public static int wszystkieKomorki;
     private final JLabel komunikat;
 
 
@@ -243,55 +244,14 @@ public class SaperModel extends JPanel {
         }
     }
 
-    public class SaperKontroler extends MouseAdapter {
-        @Override
-        public void mousePressed(MouseEvent evt) {
-            int x = evt.getX();
-            int y = evt.getY();
-            int kolumna = x / rozmiarKomorki;
-            int wiersz = y / rozmiarKomorki;
-            boolean czyRysowac = false;
-            if (!czyGra) {
-                nowaGra();
-                repaint();
-            }
-            if ((x<liczbaKolumn*rozmiarKomorki) && (y<liczbaWierszy*rozmiarKomorki)) {
-                if (evt.getButton() == MouseEvent.BUTTON3) {
-                    if (pole[(wiersz*liczbaKolumn)+kolumna] > minaKomorka) {
-                        czyRysowac = true;
-                        if (pole[(wiersz*liczbaKolumn)+kolumna] <= zakrytaMinaKomorka) {
-                            if (pozostaloMin > 0) {
-                                pole[(wiersz*liczbaKolumn)+kolumna] += oflagowanaKomorka;
-                                pozostaloMin--;
-                                komunikat.setText("Pozostało min: " + pozostaloMin);
-                            } else {
-                                komunikat.setText("Nie ma wiecej flag!");
-                            }
-                       } else {
-                            pole[(wiersz * liczbaKolumn) + kolumna] -= oflagowanaKomorka;
-                            pozostaloMin++;
-                            komunikat.setText("Pozostało min: " + pozostaloMin);
-                        }
-                    }
-                } else {
-                    if (pole[(wiersz*liczbaKolumn)+kolumna] > zakrytaMinaKomorka) {
-                        return;
-                    }
-                    if ((pole[(wiersz*liczbaKolumn)+kolumna] > minaKomorka) && (pole[(wiersz*liczbaKolumn)+kolumna]<oflagowanaMinaKomorka)) {
-                        pole[(wiersz*liczbaKolumn)+kolumna] -= zakrytaKomorka;
-                        czyRysowac = true;
-                        if (pole[(wiersz*liczbaKolumn)+kolumna] == minaKomorka) {
-                            czyGra = false;
-                        }
-                        if (pole[(wiersz*liczbaKolumn)+kolumna] == pustaKomorka) {
-                            znajdzPusteKomorki((wiersz*liczbaKolumn)+kolumna);
-                        }
-                    }
-                }
-                if(czyRysowac) {
-                    repaint();
-                }
-            }
-        }
+    public JLabel setKomunikat(String komunikat) {
+        this.komunikat.setText(komunikat);
+        return this.komunikat;
     }
+
+    public void Rysuj() {
+        repaint();
+    }
+
+
 }
