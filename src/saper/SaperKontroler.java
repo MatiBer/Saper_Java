@@ -2,14 +2,22 @@ package saper;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 
 import static saper.SaperModel.*;
 
 public class SaperKontroler extends MouseAdapter {
 
+    public static MouseListener getInstance() {
+    return new SaperKontroler();
+    }
+
+
     @Override
     public void mousePressed(MouseEvent evt) {
+
+
         SaperModel model = (SaperModel) evt.getSource();
         int x = evt.getX();
         int y = evt.getY();
@@ -28,14 +36,16 @@ public class SaperKontroler extends MouseAdapter {
                         if (pozostaloMin > 0) {
                             pole[(wiersz*liczbaKolumn)+kolumna] += oflagowanaKomorka;
                             pozostaloMin--;
-                            model.setKomunikat("Pozostało min: " + pozostaloMin);
+                            String miny = String.format("%03d", pozostaloMin);
+                            model.setKomunikat2(miny);
                         } else {
                             model.setKomunikat("Nie ma wiecej flag!");
                         }
                     } else {
                         pole[(wiersz * liczbaKolumn) + kolumna] -= oflagowanaKomorka;
                         pozostaloMin++;
-                        model.setKomunikat("Pozostało min: " + pozostaloMin);
+                        String miny = String.format("%03d", pozostaloMin);
+                        model.setKomunikat2(miny);
                     }
                 }
             } else {
@@ -59,4 +69,5 @@ public class SaperKontroler extends MouseAdapter {
             }
         }
     }
+
 }
