@@ -8,13 +8,13 @@ public class Zegar implements Runnable {
     private SaperModel model;
     private SaperWidok widok;
     private JLabel czas;
-
-    Zegar(SaperWidok widok) {
-        this.widok = widok;
+    private int secondsElapsed;
+    Zegar(JLabel czas) {
+        this.czas = czas;
     }
 
-
     public void run() {
+
         while (true) {
             try {
                 Thread.sleep(1000);
@@ -27,10 +27,8 @@ public class Zegar implements Runnable {
     }
 
     public void licznik() {
-        String time = this.czas.getText();
-        int time0 = Integer.parseInt(time);
-        ++time0;
-        this.czas.setText(Integer.toString(time0));
+        secondsElapsed++;
+        this.czas.setText(String.format("%03d", secondsElapsed));
     }
 
     public void start() {
@@ -40,9 +38,9 @@ public class Zegar implements Runnable {
         }
     }
 
-    public String getCzas() {
-        String time = czas.getText();
-        return time;
+    public int setCzas() {
+        secondsElapsed = 0;
+        return secondsElapsed;
     }
 }
 

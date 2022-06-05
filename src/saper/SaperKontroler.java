@@ -9,8 +9,13 @@ import static saper.SaperModel.*;
 
 public class SaperKontroler extends MouseAdapter {
 
-    public static MouseListener getInstance() {
-    return new SaperKontroler();
+    public static MouseListener getInstance(Zegar z) {
+    return new SaperKontroler(z);
+    }
+
+    private Zegar z;
+    SaperKontroler(Zegar z) {
+        this.z = z;
     }
 
 
@@ -28,6 +33,8 @@ public class SaperKontroler extends MouseAdapter {
             model.nowaGra();
             model.Rysuj();
         }
+        this.z.start();
+
         if ((x<liczbaKolumn*rozmiarKomorki) && (y<liczbaWierszy*rozmiarKomorki)) {
             if (evt.getButton() == MouseEvent.BUTTON3) {
                 if (pole[(wiersz*liczbaKolumn)+kolumna] > minaKomorka) {
