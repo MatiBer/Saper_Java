@@ -4,13 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SaperWidok extends JFrame {
-//    private JLabel czas;
-        int time;
         JButton przycisk;
+        public JLabel czas;
 
 
     public SaperWidok() {
-//        Zegar zegar = new Zegar(this);
         setTitle("Saper");
 
 
@@ -44,22 +42,20 @@ public class SaperWidok extends JFrame {
 
         );
 
-        JLabel czas = new JLabel("000");
-//        czas.setText(zegar.getCzas());
+        this.czas = new JLabel("000");
 
-        czas.setFont(new Font("Verdana", Font.BOLD, 32));
-        czas.setForeground(Color.RED);
-        czas.setBackground(Color.BLACK);
-        czas.setOpaque(true);
-        panel.add(czas);
+        this.czas.setFont(new Font("Verdana", Font.BOLD, 32));
+        this.czas.setForeground(Color.RED);
+        this.czas.setBackground(Color.BLACK);
+        this.czas.setOpaque(true);
 
+        panel.add(this.czas);
 
         JPanel plansza = new JPanel();
         add(komunikat, BorderLayout.SOUTH); // wyświetla komunikat w dolnym miejscu
         add(panel, BorderLayout.NORTH); // wyświetla pane w górnym miejscu
-        plansza.add(new SaperModel(komunikat, komunikat2)); // dodaje plansze do panelu
+        plansza.add(new SaperModel(komunikat, komunikat2, new Zegar(this.czas))); // dodaje plansze do panelu
         add(plansza, BorderLayout.CENTER); // wyświetla planszę
-//        setPreferredSize(new Dimension(250, 350));
         setBackground(Color.BLACK);
         setResizable(false);
         pack();
@@ -68,10 +64,6 @@ public class SaperWidok extends JFrame {
         paintComponents(getGraphics());
     }
 
-    public void setCzas(int time) {
-       this.time = time;
-       System.out.println(time);
-    }
 
 
 

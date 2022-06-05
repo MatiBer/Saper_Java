@@ -24,9 +24,8 @@ public class SaperModel extends JPanel {
     private final JLabel komunikat2;
 
 
-
-    public SaperModel(JLabel komunikat, JLabel komunikat2) {
-        Plansza plansza = new Plansza();
+    public SaperModel(JLabel komunikat, JLabel komunikat2, Zegar zegar) {
+        Plansza plansza = new Plansza(zegar);
         this.komunikat = komunikat;
         this.komunikat2 = komunikat2;
 //        this.czas = czas;
@@ -38,6 +37,10 @@ public class SaperModel extends JPanel {
 
 
     public class Plansza { // Plansza (psuje się jak jest w osobnym pliku)
+        private Zegar zegar;
+        Plansza(Zegar zegar) {
+            this.zegar = zegar;
+        }
         public void inicjujPlansze() {
             int szerokosc = liczbaKolumn * rozmiarKomorki;
             int wysokosc = liczbaWierszy * rozmiarKomorki;
@@ -47,7 +50,9 @@ public class SaperModel extends JPanel {
             for (int i = 0; i < numerIkony; i++) {
                 ikona[i] = new ImageIcon("src/ikony/" + i + ".png").getImage();
             }
-            addMouseListener(SaperKontroler.getInstance());
+            var sk = SaperKontroler.getInstance(this.zegar);
+            addMouseListener(sk);
+            this.zegar.setCzas();
         }
 
     }
