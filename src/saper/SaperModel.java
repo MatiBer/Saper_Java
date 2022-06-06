@@ -36,26 +36,6 @@ public class SaperModel extends JPanel {
     }
 
 
-    public class Plansza { // Plansza (psuje się jak jest w osobnym pliku)
-        private Zegar zegar;
-        Plansza(Zegar zegar) {
-            this.zegar = zegar;
-        }
-        public void inicjujPlansze() {
-            int szerokosc = liczbaKolumn * rozmiarKomorki;
-            int wysokosc = liczbaWierszy * rozmiarKomorki;
-            setPreferredSize(new Dimension(szerokosc, wysokosc));
-            int numerIkony = 13;
-            ikona = new Image[numerIkony];
-            for (int i = 0; i < numerIkony; i++) {
-                ikona[i] = new ImageIcon("src/ikony/" + i + ".png").getImage();
-            }
-            var sk = SaperKontroler.getInstance(this.zegar);
-            addMouseListener(sk);
-            this.zegar.setCzas();
-        }
-
-    }
 
     public void nowaGra() {
         int komorka;
@@ -69,11 +49,9 @@ public class SaperModel extends JPanel {
             pole[i] = zakrytaKomorka;
         }
         komunikat.setText(" ");
-//        komunikat2.setText(Integer.toString(pozostaloMin));
         String miny = String.format("%03d", pozostaloMin);
         komunikat2.setText(miny);
-//        Zegar licznik = new Zegar(this);
-//        licznik.start();
+
         int i = 0;
         while (i < liczbaMin) { //Funkcja losowo rozmieszcza miny i ustala wartosci na polach dookoła
             int pozycja = (int) (losuj.nextDouble() * wszystkieKomorki); //Losuje pozycje miny
@@ -252,8 +230,6 @@ public class SaperModel extends JPanel {
                 }
                 g.drawImage(ikona[komorka], j*rozmiarKomorki, i*rozmiarKomorki, this);
 
-                g.setColor(Color.BLACK);
-//                g.drawRect(j*rozmiarKomorki, i*rozmiarKomorki, rozmiarKomorki, rozmiarKomorki);//dodaje ramki
             }
         }
         if (odkryta == 0 && czyGra) {
@@ -262,6 +238,27 @@ public class SaperModel extends JPanel {
         } else if (!czyGra) {
             komunikat.setText("Przegrałeś!");
         }
+    }
+
+    public class Plansza { // Plansza (psuje się jak jest w osobnym pliku)
+        private Zegar zegar;
+        Plansza(Zegar zegar) {
+            this.zegar = zegar;
+        }
+        public void inicjujPlansze() {
+            int szerokosc = liczbaKolumn * rozmiarKomorki;
+            int wysokosc = liczbaWierszy * rozmiarKomorki;
+            setPreferredSize(new Dimension(szerokosc, wysokosc));
+            int numerIkony = 13;
+            ikona = new Image[numerIkony];
+            for (int i = 0; i < numerIkony; i++) {
+                ikona[i] = new ImageIcon("src/ikony/" + i + ".png").getImage();
+            }
+            var sk = SaperKontroler.getInstance(this.zegar);
+            addMouseListener(sk);
+            this.zegar.setCzas();
+        }
+
     }
 
     public JLabel setKomunikat(String komunikat) {
