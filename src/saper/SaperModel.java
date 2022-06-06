@@ -118,7 +118,7 @@ public class SaperModel extends JPanel {
 
     public void znajdzPusteKomorki(int pozycja) { //znajduje puste komorki dookola pozycji
         int aktualnaKolumna = pozycja % liczbaKolumn; //tablica jednowymiarowa - kolumna jest pobierana z modulo
-        int komorka; //komorka oznacza pozycje w tablicy jednowymiarowej
+        int komorka; //komorka oznacza pozycje w tablicy jednowymiarowej pole[]
         if (aktualnaKolumna > 0) {
             komorka = pozycja - liczbaKolumn - 1;
             if (komorka >= 0) {
@@ -203,32 +203,32 @@ public class SaperModel extends JPanel {
         int odkryta = 0;
         for (int i = 0; i<liczbaWierszy; i++) {
             for (int j = 0; j < liczbaKolumn; j++) {
-                int komorka = pole[(i*liczbaKolumn)+j];
-                if (czyGra && komorka == minaKomorka) {
+                int element = pole[(i*liczbaKolumn)+j];//element tablicy ikona
+                if (czyGra && element == minaKomorka) {
                     czyGra = false;
                 }
 
                 int zakryta = 10;
                 int oflagowana = 11;
                 if (!czyGra) {
-                    if (komorka == zakrytaMinaKomorka) {
-                        komorka = 9;
-                    } else if (komorka == oflagowanaMinaKomorka) {
-                        komorka = oflagowana;
-                    } else if (komorka > zakrytaMinaKomorka) {
-                        komorka = 12;
-                    } else if (komorka > minaKomorka) {
-                        komorka = zakryta;
+                    if (element == zakrytaMinaKomorka) {
+                        element = 9;
+                    } else if (element == oflagowanaMinaKomorka) {
+                        element = oflagowana;
+                    } else if (element > zakrytaMinaKomorka) {
+                        element = 12;
+                    } else if (element > minaKomorka) {
+                        element = zakryta;
                     }
                 } else {
-                    if (komorka > zakrytaMinaKomorka) {
-                        komorka = oflagowana;
-                    } else if (komorka > minaKomorka) {
-                        komorka = zakryta;
+                    if (element > zakrytaMinaKomorka) {
+                        element = oflagowana;
+                    } else if (element > minaKomorka) {
+                        element = zakryta;
                         odkryta++;
                     }
                 }
-                g.drawImage(ikona[komorka], j*rozmiarKomorki, i*rozmiarKomorki, this);
+                g.drawImage(ikona[element], j*rozmiarKomorki, i*rozmiarKomorki, this);
 
             }
         }
