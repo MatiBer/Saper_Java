@@ -36,26 +36,6 @@ public class SaperModel extends JPanel {
     }
 
 
-    public class Plansza { // Plansza (psuje się jak jest w osobnym pliku)
-        private Zegar zegar;
-        Plansza(Zegar zegar) {
-            this.zegar = zegar;
-        }
-        public void inicjujPlansze() {
-            int szerokosc = liczbaKolumn * rozmiarKomorki;
-            int wysokosc = liczbaWierszy * rozmiarKomorki;
-            setPreferredSize(new Dimension(szerokosc, wysokosc));
-            int numerIkony = 13;
-            ikona = new Image[numerIkony];
-            for (int i = 0; i < numerIkony; i++) {
-                ikona[i] = new ImageIcon("src/ikony/" + i + ".png").getImage();
-            }
-            var sk = SaperKontroler.getInstance(this.zegar);
-            addMouseListener(sk);
-            this.zegar.setCzas();
-        }
-
-    }
 
     public void nowaGra() {
         int komorka;
@@ -69,11 +49,9 @@ public class SaperModel extends JPanel {
             pole[i] = zakrytaKomorka;
         }
         komunikat.setText(" ");
-//        komunikat2.setText(Integer.toString(pozostaloMin));
         String miny = String.format("%03d", pozostaloMin);
         komunikat2.setText(miny);
-//        Zegar licznik = new Zegar(this);
-//        licznik.start();
+
         int i = 0;
         while (i < liczbaMin) { //Funkcja losowo rozmieszcza miny i ustala wartosci na polach dookoła
             int pozycja = (int) (losuj.nextDouble() * wszystkieKomorki); //Losuje pozycje miny
@@ -140,7 +118,7 @@ public class SaperModel extends JPanel {
 
     public void znajdzPusteKomorki(int pozycja) { //znajduje puste komorki dookola pozycji
         int aktualnaKolumna = pozycja % liczbaKolumn; //tablica jednowymiarowa - kolumna jest pobierana z modulo
-        int komorka; //komorka oznacza pozycje w tablicy jednowymiarowej
+        int komorka; //komorka oznacza pozycje w tablicy jednowymiarowej pole[]
         if (aktualnaKolumna > 0) {
             komorka = pozycja - liczbaKolumn - 1;
             if (komorka >= 0) {
@@ -225,35 +203,33 @@ public class SaperModel extends JPanel {
         int odkryta = 0;
         for (int i = 0; i<liczbaWierszy; i++) {
             for (int j = 0; j < liczbaKolumn; j++) {
-                int komorka = pole[(i*liczbaKolumn)+j];
-                if (czyGra && komorka == minaKomorka) {
+                int element = pole[(i*liczbaKolumn)+j];//element tablicy ikona
+                if (czyGra && element == minaKomorka) {
                     czyGra = false;
                 }
 
                 int zakryta = 10;
                 int oflagowana = 11;
                 if (!czyGra) {
-                    if (komorka == zakrytaMinaKomorka) {
-                        komorka = 9;
-                    } else if (komorka == oflagowanaMinaKomorka) {
-                        komorka = oflagowana;
-                    } else if (komorka > zakrytaMinaKomorka) {
-                        komorka = 12;
-                    } else if (komorka > minaKomorka) {
-                        komorka = zakryta;
+                    if (element == zakrytaMinaKomorka) {
+                        element = 9;
+                    } else if (element == oflagowanaMinaKomorka) {
+                        element = oflagowana;
+                    } else if (element > zakrytaMinaKomorka) {
+                        element = 12;
+                    } else if (element > minaKomorka) {
+                        element = zakryta;
                     }
                 } else {
-                    if (komorka > zakrytaMinaKomorka) {
-                        komorka = oflagowana;
-                    } else if (komorka > minaKomorka) {
-                        komorka = zakryta;
+                    if (element > zakrytaMinaKomorka) {
+                        element = oflagowana;
+                    } else if (element > minaKomorka) {
+                        element = zakryta;
                         odkryta++;
                     }
                 }
-                g.drawImage(ikona[komorka], j*rozmiarKomorki, i*rozmiarKomorki, this);
+                g.drawImage(ikona[element], j*rozmiarKomorki, i*rozmiarKomorki, this);
 
-                g.setColor(Color.BLACK);
-//                g.drawRect(j*rozmiarKomorki, i*rozmiarKomorki, rozmiarKomorki, rozmiarKomorki);//dodaje ramki
             }
         }
         if (odkryta == 0 && czyGra) {
@@ -262,6 +238,27 @@ public class SaperModel extends JPanel {
         } else if (!czyGra) {
             komunikat.setText("Przegrałeś!");
         }
+    }
+
+    public class Plansza { // Plansza (psuje się jak jest w osobnym pliku)
+        private Zegar zegar;
+        Plansza(Zegar zegar) {
+            this.zegar = zegar;
+        }
+        public void inicjujPlansze() {
+            int szerokosc = liczbaKolumn * rozmiarKomorki;
+            int wysokosc = liczbaWierszy * rozmiarKomorki;
+            setPreferredSize(new Dimension(szerokosc, wysokosc));
+            int numerIkony = 13;
+            ikona = new Image[numerIkony];
+            for (int i = 0; i < numerIkony; i++) {
+                ikona[i] = new ImageIcon("src/ikony/" + i + ".png").getImage();
+            }
+            var sk = SaperKontroler.getInstance(this.zegar);
+            addMouseListener(sk);
+            this.zegar.setCzas();
+        }
+
     }
 
     public JLabel setKomunikat(String komunikat) {

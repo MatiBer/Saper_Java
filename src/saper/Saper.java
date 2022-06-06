@@ -10,8 +10,7 @@ public class Saper {
 
         SaperWidok okno = new SaperWidok();
         okno.setVisible(true);
-//        Zegar zegar = new Zegar(JL czas);
-//        zegar.run();
+
 
     }
 
