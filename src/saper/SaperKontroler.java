@@ -64,6 +64,7 @@ public class SaperKontroler extends MouseAdapter {
                     czyRysowac = true;
                     if (pole[(wiersz*liczbaKolumn)+kolumna] == minaKomorka) {
                         czyGra = false;
+                        this.z.restart();
                     }
                     if (pole[(wiersz*liczbaKolumn)+kolumna] == pustaKomorka) {
                         model.znajdzPusteKomorki((wiersz*liczbaKolumn)+kolumna);

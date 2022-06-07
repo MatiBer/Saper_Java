@@ -38,9 +38,11 @@ public class Zegar implements Runnable {
         }
     }
 
-    public int setCzas() {
+    public void restart() {
         secondsElapsed = 0;
-        return secondsElapsed;
+        this.czas.setText("000");
+
     }
+
 }
 

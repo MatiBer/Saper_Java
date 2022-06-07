@@ -256,7 +256,6 @@ public class SaperModel extends JPanel {
             }
             var sk = SaperKontroler.getInstance(this.zegar);
             addMouseListener(sk);
-            this.zegar.setCzas();
         }
 
     }
