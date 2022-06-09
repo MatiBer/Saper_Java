@@ -3,6 +3,7 @@ package saper;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
 
 
 import static saper.SaperModel.*;
@@ -13,7 +14,7 @@ public class SaperKontroler extends MouseAdapter {
     return new SaperKontroler(z);
     }
 
-    private Zegar z;
+    private final Zegar z;
     SaperKontroler(Zegar z) {
         this.z = z;
     }
@@ -40,12 +41,24 @@ public class SaperKontroler extends MouseAdapter {
                 if (pole[(wiersz*liczbaKolumn)+kolumna] > minaKomorka) {
                     czyRysowac = true;
                     if (pole[(wiersz*liczbaKolumn)+kolumna] <= zakrytaMinaKomorka) {
-                        if (pozostaloMin > 0) {
+//                        if (pozostaloMin > 0) {
+//                            pole[(wiersz*liczbaKolumn)+kolumna] += oflagowanaKomorka;
+//                            pozostaloMin--;
+//                            String miny = String.format("%03d", pozostaloMin);
+//                            model.setKomunikat2(miny);
+//                        } else {
+//                            model.setKomunikat("Nie ma wiecej flag!");
+//                        }
+                        try{
+                            int wyjatekKontrolowany = kolumna * wiersz / pozostaloMin;
                             pole[(wiersz*liczbaKolumn)+kolumna] += oflagowanaKomorka;
                             pozostaloMin--;
                             String miny = String.format("%03d", pozostaloMin);
                             model.setKomunikat2(miny);
-                        } else {
+                        }
+                        catch (ArithmeticException e){
+                            //Wypisanie wyjatku tymczasowo na konsole
+                            System.out.println("Wyjatek - brak flag");
                             model.setKomunikat("Nie ma wiecej flag!");
                         }
                     } else {
@@ -64,7 +77,11 @@ public class SaperKontroler extends MouseAdapter {
                     czyRysowac = true;
                     if (pole[(wiersz*liczbaKolumn)+kolumna] == minaKomorka) {
                         czyGra = false;
-                        this.z.restart();
+                        try {
+                            this.z.restart();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
                     if (pole[(wiersz*liczbaKolumn)+kolumna] == pustaKomorka) {
                         model.znajdzPusteKomorki((wiersz*liczbaKolumn)+kolumna);
