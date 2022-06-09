@@ -252,7 +252,7 @@ public class SaperModel extends JPanel {
             int numerIkony = 13;
             ikona = new Image[numerIkony];
             for (int i = 0; i < numerIkony; i++) {
-                ikona[i] = new ImageIcon( "src/ikony/" + i + ".png").getImage();
+                ikona[i] = new ImageIcon( "ikony/" + i + ".png").getImage();
             }
             var sk = SaperKontroler.getInstance(this.zegar);
             addMouseListener(sk);
