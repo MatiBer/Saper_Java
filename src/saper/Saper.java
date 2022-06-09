@@ -1,12 +1,10 @@
 package saper;
 
 
-import java.awt.*;
-import java.io.IOException;
 
 public class Saper {
 
-    public static void main(String[] args) throws IOException, FontFormatException {
+    public static void main(String[] args)  {
 
         SaperWidok okno = new SaperWidok();
         okno.setVisible(true);

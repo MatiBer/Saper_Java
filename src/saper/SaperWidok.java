@@ -2,6 +2,7 @@ package saper;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class SaperWidok extends JFrame {
         JButton przycisk;
@@ -11,13 +12,12 @@ public class SaperWidok extends JFrame {
     public SaperWidok() {
         setTitle("Saper");
 
-
-        String[] poziomy = {"łatwy","średni","trudny"};
-        JComboBox poziom = new JComboBox(poziomy);
-
-        JPanel opcje = new JPanel();
-        opcje.add(poziom);
-        add(opcje);
+//
+//        String[] poziomy = {"łatwy","średni","trudny"};
+//        JComboBox poziom = new JComboBox(poziomy);
+//        JPanel opcje = new JPanel();
+//        opcje.add(poziom);
+//        add(opcje);
 
         JLabel komunikat = new JLabel(" ");
         komunikat.setFont(new Font("Arial", Font.BOLD, 12));
@@ -35,12 +35,6 @@ public class SaperWidok extends JFrame {
         przycisk = new JButton(new ImageIcon(buzka));
         przycisk.setPreferredSize(new Dimension(36,36));
         panel.add(przycisk);
-        przycisk.addActionListener( //Operacja po kliknieciu w buzke
-                evt -> {
-
-                }
-
-        );
 
         this.czas = new JLabel("000");
 
@@ -50,11 +44,13 @@ public class SaperWidok extends JFrame {
         this.czas.setOpaque(true);
 
         panel.add(this.czas);
+        Zegar zegar = new Zegar(this.czas);
+
 
         JPanel plansza = new JPanel();
         add(komunikat, BorderLayout.SOUTH); // wyświetla komunikat w dolnym miejscu
         add(panel, BorderLayout.NORTH); // wyświetla pane w górnym miejscu
-        plansza.add(new SaperModel(komunikat, komunikat2, new Zegar(this.czas))); // dodaje plansze do panelu
+        plansza.add(new SaperModel(komunikat, komunikat2, zegar)); // dodaje plansze do panelu
         add(plansza, BorderLayout.CENTER); // wyświetla planszę
         setBackground(Color.BLACK);
         setResizable(false);
@@ -62,6 +58,19 @@ public class SaperWidok extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         paintComponents(getGraphics());
+
+        przycisk.addActionListener( //Operacja po kliknieciu w buzke
+                evt -> {
+                    try {
+                        zegar.restart();
+                        SaperModel.czyGra = false;
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+        );
+
     }
 
 

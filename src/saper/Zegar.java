@@ -1,14 +1,15 @@
 package saper;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class Zegar implements Runnable {
 
     private Thread t;
-    private SaperModel model;
-    private SaperWidok widok;
-    private JLabel czas;
-    private int secondsElapsed;
+    private final JLabel czas;
+    private int sekundy;
+    private boolean gameInProgress = false;
     Zegar(JLabel czas) {
         this.czas = czas;
     }
@@ -27,8 +28,10 @@ public class Zegar implements Runnable {
     }
 
     public void licznik() {
-        secondsElapsed++;
-        this.czas.setText(String.format("%03d", secondsElapsed));
+        if(gameInProgress) {
+            sekundy++;
+            this.czas.setText(String.format("%03d", sekundy));
+        }
     }
 
     public void start() {
@@ -36,11 +39,17 @@ public class Zegar implements Runnable {
             t = new Thread(this);
             t.start();
         }
+        gameInProgress = true;
     }
 
-    public int setCzas() {
-        secondsElapsed = 0;
-        return secondsElapsed;
+    public void restart() throws FileNotFoundException {
+        gameInProgress = false;
+        PrintWriter zapis = new PrintWriter("wynik.txt");
+        zapis.println("Czas gry: " + sekundy);
+        zapis.close();
+        this.czas.setText(String.format("%03d", sekundy));
+        sekundy = 0;
     }
+
 }
 
