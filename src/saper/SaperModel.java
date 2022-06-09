@@ -241,7 +241,7 @@ public class SaperModel extends JPanel {
     }
 
     public class Plansza { // Plansza (psuje się jak jest w osobnym pliku)
-        private Zegar zegar;
+        private final Zegar zegar;
         Plansza(Zegar zegar) {
             this.zegar = zegar;
         }
@@ -260,25 +260,16 @@ public class SaperModel extends JPanel {
 
     }
 
-    public JLabel setKomunikat(String komunikat) {
+    public void setKomunikat(String komunikat) {
         this.komunikat.setText(komunikat);
-        return this.komunikat;
     }
 
-    public JLabel setKomunikat2(String komunikat) {
+    public void setKomunikat2(String komunikat) {
         this.komunikat2.setText(komunikat);
-        return this.komunikat2;
     }
 
     public void Rysuj() {
         repaint();
-    }
-
-    public int getSzerokosc() {
-        return liczbaKolumn * rozmiarKomorki;
-    }
-    public int getWysokosc() {
-        return liczbaWierszy * rozmiarKomorki;
     }
 
 
