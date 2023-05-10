@@ -22,29 +22,29 @@ więcej flag.
 ![image](https://github.com/MatiBer/Saper_Java/assets/106385056/4feb7cf0-7f15-4140-a008-9c34f5d16826)
 
 ## Opis Klas i metod
-<pre>
-Saper – główna klasa projektu\
+
+**Saper** – główna klasa projektu\
   main(String[] args) – tworzy objekt klasy SaperWidok\
 
-SaperModel – odpowiada za główne mechanizmy\
+**SaperModel** – odpowiada za główne mechanizmy\
   nowaGra() – tworzy planszę o określonych wymiarach, ustawia losowo miny i wstawia w polach wartości min dookoła\
   znajdzPusteKomorki(int pozycja) – sprawdza, które komórki są puste dookoła klikniętego pola. Jeśli któreś pole dookoła jest puste to ponownie sprawdza czy komórki wokół są puste.\
   paintComponent(Graphics g) – odkrywa pola wstawiając ikony w miejsce pola
 
-Plansza – podklasa klasy SaperModel\
+**Plansza** – podklasa klasy SaperModel\
   inicjujPlansze()
 
-SaperWidok – buduje okno\
+**SaperWidok** – buduje okno\
   SaperWidok() – konstruktor, który tworzy okno
 
-SaperKontroler – zawiera instrukcje wykonywane po kliknięciu myszą\
+**SaperKontroler** – zawiera instrukcje wykonywane po kliknięciu myszą\
   mousePressed(MouseEvent evt) – wykonuje instrukcje
 
-Zegar – liczy czas\
+**Zegar** – liczy czas\
   Run() – czeka 1 sekunde i wywołuje licznik\
   Licznik() – inkrementuje sekundy\
   Start() – tworzy nowy wątek
-<pre>
+
 ## Instrukcja do kompilacji i uruchomienia:
 
 Z poziomu katalogu, w którym znajduje się folder „src”,kompilujemy poleceniem:\
