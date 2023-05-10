@@ -28,7 +28,7 @@ main(String[] args) – tworzy objekt klasy SaperWidok
     
 SaperModel – odpowiada za główne mechanizmy
 nowaGra() – tworzy planszę o określonych wymiarach, ustawia losowo miny i wstawia w polach wartości min dookoła
-znajdzPusteKomorki(int pozycja) – sprawdza, które komórki są puste dookoła klikniętego pola. Jeśli któreś pole        dookoła jest puste to ponownie sprawdza czy komórki wokół są puste.
+znajdzPusteKomorki(int pozycja) – sprawdza, które komórki są puste dookoła klikniętego pola. Jeśli któreś pole dookoła jest puste to ponownie sprawdza czy komórki wokół są puste.
 paintComponent(Graphics g) – odkrywa pola wstawiając ikony w miejsce pola
     
 Plansza – podklasa klasy SaperModel
