@@ -23,27 +23,27 @@ więcej flag.
 
 ## Opis Klas i metod
 
-Saper – główna klasa projektu
-main(String[] args) – tworzy objekt klasy SaperWidok
+Saper – główna klasa projektu\
+main(String[] args) – tworzy objekt klasy SaperWidok\
 
-SaperModel – odpowiada za główne mechanizmy
-nowaGra() – tworzy planszę o określonych wymiarach, ustawia losowo miny i wstawia w polach wartości min dookoła
-znajdzPusteKomorki(int pozycja) – sprawdza, które komórki są puste dookoła klikniętego pola. Jeśli któreś pole dookoła jest puste to ponownie sprawdza czy komórki wokół są puste.
-paintComponent(Graphics g) – odkrywa pola wstawiając ikony w miejsce pola
+SaperModel – odpowiada za główne mechanizmy\
+nowaGra() – tworzy planszę o określonych wymiarach, ustawia losowo miny i wstawia w polach wartości min dookoła\
+znajdzPusteKomorki(int pozycja) – sprawdza, które komórki są puste dookoła klikniętego pola. Jeśli któreś pole dookoła jest puste to ponownie sprawdza czy komórki wokół są puste.\
+paintComponent(Graphics g) – odkrywa pola wstawiając ikony w miejsce pola\
 
-Plansza – podklasa klasy SaperModel
-inicjujPlansze()
+Plansza – podklasa klasy SaperModel\
+inicjujPlansze()\
 
-SaperWidok – buduje okno
-SaperWidok() – konstruktor, który tworzy okno
+SaperWidok – buduje okno\
+SaperWidok() – konstruktor, który tworzy okno\
 
-SaperKontroler – zawiera instrukcje wykonywane po kliknięciu myszą
-mousePressed(MouseEvent evt) – wykonuje instrukcje
+SaperKontroler – zawiera instrukcje wykonywane po kliknięciu myszą\
+mousePressed(MouseEvent evt) – wykonuje instrukcje\
 
-Zegar – liczy czas
-Run() – czeka 1 sekunde i wywołuje licznik
-Licznik() – inkrementuje sekundy
-Start() – tworzy nowy wątek
+Zegar – liczy czas\
+Run() – czeka 1 sekunde i wywołuje licznik\
+Licznik() – inkrementuje sekundy\
+Start() – tworzy nowy wątek\
 
 ## Instrukcja do kompilacji i uruchomienia:
 
