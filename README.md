@@ -29,28 +29,28 @@ Saper – główna klasa projektu\
 SaperModel – odpowiada za główne mechanizmy\
   nowaGra() – tworzy planszę o określonych wymiarach, ustawia losowo miny i wstawia w polach wartości min dookoła\
   znajdzPusteKomorki(int pozycja) – sprawdza, które komórki są puste dookoła klikniętego pola. Jeśli któreś pole dookoła jest puste to ponownie sprawdza czy komórki wokół są puste.\
-  paintComponent(Graphics g) – odkrywa pola wstawiając ikony w miejsce pola\
+  paintComponent(Graphics g) – odkrywa pola wstawiając ikony w miejsce pola
 
 Plansza – podklasa klasy SaperModel\
-  inicjujPlansze()\
+  inicjujPlansze()
 
 SaperWidok – buduje okno\
-  SaperWidok() – konstruktor, który tworzy okno\
+  SaperWidok() – konstruktor, który tworzy okno
 
 SaperKontroler – zawiera instrukcje wykonywane po kliknięciu myszą\
-  mousePressed(MouseEvent evt) – wykonuje instrukcje\
+  mousePressed(MouseEvent evt) – wykonuje instrukcje
 
 Zegar – liczy czas\
   Run() – czeka 1 sekunde i wywołuje licznik\
   Licznik() – inkrementuje sekundy\
-  Start() – tworzy nowy wątek\
+  Start() – tworzy nowy wątek
 
 ## Instrukcja do kompilacji i uruchomienia:
 
 Z poziomu katalogu, w którym znajduje się folder „src”,kompilujemy poleceniem:\
 javac -d . ./src/saper/*.java\
 Następnie uruchamiamy poleceniem:\
-java saper.Saper\
+java saper.Saper
 
 lub jeśli mamy Java SE Runtime Environment to wystarzy z jego pomocą uruhomić plik "Saper.jar"
 
