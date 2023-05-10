@@ -22,7 +22,7 @@ więcej flag.
 ![image](https://github.com/MatiBer/Saper_Java/assets/106385056/4feb7cf0-7f15-4140-a008-9c34f5d16826)
 
 ## Opis Klas i metod
-
+<pre>
 Saper – główna klasa projektu\
   main(String[] args) – tworzy objekt klasy SaperWidok\
 
@@ -44,7 +44,7 @@ Zegar – liczy czas\
   Run() – czeka 1 sekunde i wywołuje licznik\
   Licznik() – inkrementuje sekundy\
   Start() – tworzy nowy wątek
-
+<pre>
 ## Instrukcja do kompilacji i uruchomienia:
 
 Z poziomu katalogu, w którym znajduje się folder „src”,kompilujemy poleceniem:\
